@@ -17,7 +17,8 @@ const list2 = [2, 5, 8, 11]
 const mergeArrays = (l1, l2) => {
 
     let mergedArray = []
-
+    let length = l1.length + l2.length
+    let currentIndex = 0
     for(let i = 0; i < list1.length; i++) {
         let headOfFirst = l1[i]
         let headOfSecond = l2[i]
@@ -25,8 +26,9 @@ const mergeArrays = (l1, l2) => {
         let higher = headOfFirst < headOfSecond ? headOfFirst : headOfSecond
         let lower = headOfFirst > headOfSecond ? headOfFirst : headOfSecond
 
-        mergedArray[i] = higher
-        mergedArray[i+1] = lower
+        mergedArray[currentIndex] = higher
+        mergedArray[++currentIndex] = lower
+        ++currentIndex
     }
 
     return mergedArray
