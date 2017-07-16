@@ -11,28 +11,52 @@ alices_list = [1, 5, 8, 12, 14, 19]
 print merge_lists(my_list, alices_list)
 # prints [1, 3, 4, 5, 6, 8, 10, 11, 12, 14, 15, 19]`
 
-const list1 = [1, 3, 7, 9]
-const list2 = [2, 5, 8, 11]
-
 const mergeArrays = (l1, l2) => {
 
+    if(l1.length === 0) return l2
+    if(l2.length === 0) return l1
+
     let mergedArray = []
-    let length = l1.length + l2.length
+    let length = Math.max((l1.length + l2.length) / 2)
     let currentIndex = 0
-    for(let i = 0; i < list1.length; i++) {
+   
+    for(let i = 0; i < length; i++) {
         let headOfFirst = l1[i]
         let headOfSecond = l2[i]
 
-        let higher = headOfFirst < headOfSecond ? headOfFirst : headOfSecond
-        let lower = headOfFirst > headOfSecond ? headOfFirst : headOfSecond
+        if(headOfFirst < headOfSecond) {
+            higher = headOfFirst
+            lower = headOfSecond
+        }
+        else {
+            higher = headOfSecond
+            lower = headOfFirst
+        }
 
-        mergedArray[currentIndex] = higher
-        mergedArray[++currentIndex] = lower
+        if(higher !== 'undefined') {
+            mergedArray[currentIndex] = higher
+        }
+
+        if(lower !== 'undefined') {
+            mergedArray[++currentIndex] = lower
+        }
+        else {
+            mergedArray[currentIndex] = lower
+        }
+        
         ++currentIndex
     }
 
     return mergedArray
 }
 
+const list1 = [1, 3, 7, 9]
+const list2 = [2, 5, 8, 11]
 const mergedLists = mergeArrays(list1, list2)
 console.log(mergedLists)
+
+const edgeCase1 = mergeArrays([], [1, 3])
+console.log(edgeCase1)
+
+const edgeCase2 = mergeArrays([1], [2, 3, 4])
+console.log(edgeCase2)
