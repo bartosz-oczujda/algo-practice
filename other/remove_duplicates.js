@@ -1,4 +1,5 @@
 // remove duplicates from an array
+const input = [5, 5, 5, 6, 7, 1, 1, 4, 2, 2]
 
 const removeDuplicates = (arr) => {
 
@@ -19,10 +20,20 @@ const removeDuplicates = (arr) => {
 
 
 const removeDuplicatesRecursive = (arr) => {
-    // TODO
+    
+    if (arr.length === 0) {
+        return arr
+    }
+
+    const [head, ...tail] = arr
+    const filteredTail = tail.filter( (item) => item !== head ) 
+
+    return [head, ...removeDuplicatesRecursive(filteredTail)]
+
 }
 
-const input = [5, 5, 6, 7, 1, 1, 4, 2, 2]
 const output = removeDuplicates(input)
-
 console.log(output)
+
+const outputRecursive = removeDuplicatesRecursive(input)
+console.log(outputRecursive)
