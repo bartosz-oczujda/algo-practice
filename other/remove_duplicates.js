@@ -7,11 +7,12 @@ const removeDuplicates = (arr) => {
     let newArr = []
 
     for(val of arr) {
-        hash.set(val, true)
-    }
+       
+        if(hash.get(val) !== true) {
+            hash.set(val, true)
+            newArr.push(val)
+        }
 
-    for([key, val] of hash) {
-        newArr.push(key)
     }
 
     return newArr;
