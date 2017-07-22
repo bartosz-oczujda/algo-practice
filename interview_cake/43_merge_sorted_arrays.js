@@ -13,50 +13,46 @@ print merge_lists(my_list, alices_list)
 
 const mergeArrays = (l1, l2) => {
 
-    if(l1.length === 0) return l2
-    if(l2.length === 0) return l1
+    const merged = []
+    const mergedLength = l1.length + l2.length
+    let l1_index = 0
+    let l2_index = 0
+    let merged_index = 0
 
-    let mergedArray = []
-    let length = Math.max((l1.length + l2.length) / 2)
-    let currentIndex = 0
-   
-    for(let i = 0; i < length; i++) {
-        let headOfFirst = l1[i]
-        let headOfSecond = l2[i]
-
-        if(headOfFirst < headOfSecond) {
-            higher = headOfFirst
-            lower = headOfSecond
-        }
-        else {
-            higher = headOfSecond
-            lower = headOfFirst
-        }
-
-        if(higher !== 'undefined') {
-            mergedArray[currentIndex] = higher
-        }
-
-        if(lower !== 'undefined') {
-            mergedArray[++currentIndex] = lower
-        }
-        else {
-            mergedArray[currentIndex] = lower
-        }
-        
-        ++currentIndex
+    if(l1.length === 0) {
+        return l2
+    }
+    else if(l2.length === 0) {
+        return l1
     }
 
-    return mergedArray
+    for(let i = 0; i < mergedLength; i++) {
+    
+        const num1 = l1[l1_index]
+        const num2 = l2[l2_index]    
+
+        if (num1 < num2) {
+            merged[i] = num1
+            l1_index++     
+        } 
+        else {
+            merged[i] = num2
+            l2_index++
+        }
+    } 
+
+    return merged
+
 }
 
-const list1 = [1, 3, 7, 9]
-const list2 = [2, 5, 8, 11]
+const list1 = [1, 2, 7, 9]
+const list2 = [3, 4, 8, 11]
 const mergedLists = mergeArrays(list1, list2)
 console.log(mergedLists)
 
-const edgeCase1 = mergeArrays([], [1, 3])
-console.log(edgeCase1)
+const shorterList = [1, 2]
+const mergedWithShorter = mergeArrays(shorterList, list2)
+console.log(mergedWithShorter)
 
-const edgeCase2 = mergeArrays([1], [2, 3, 4])
-console.log(edgeCase2)
+const mergedWithEmpty = mergeArrays([], list2)
+console.log(mergedWithEmpty)
