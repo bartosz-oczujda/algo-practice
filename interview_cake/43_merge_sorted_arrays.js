@@ -17,7 +17,6 @@ const mergeArrays = (l1, l2) => {
     const mergedLength = l1.length + l2.length
     let l1_index = 0
     let l2_index = 0
-    let merged_index = 0
 
     if(l1.length === 0) {
         return l2
