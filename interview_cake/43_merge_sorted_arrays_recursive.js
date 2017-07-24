@@ -13,39 +13,34 @@ print merge_lists(my_list, alices_list)
 
 const mergeArrays = (l1, l2) => {
 
-    const [head2, ...tail2] = l2
-    
-    if(l1.length === 0) {
+    const merge = (l1, l2, acc) => {
 
-        return l2
+        const [head1, ...tail1] = l1
+        const [head2, ...tail2] = l2
 
-    }
+        if(l1.length === 0) {
+            acc = [...acc, ...l2]
+            return acc
+        }
 
-    if(l2.length === 0) {
+        if(l2.length === 0) {
+            acc = [...acc, ...l1]
+            return acc
+        }
 
-        return l1
-
-    }
-
-    if(head2 > l1[l1.length - 1]) {
-
-        const newArr = [...l1, head2]
-        return mergeArrays(newArr, tail2)
-
-    }
-
-    for (let i = 0; i < l1.length; i++) {
-        
-        if(head2 < l1[i]) {
-            
-            const newArr = [...l1]
-            newArr.splice(i, 0, head2)
-            
-            return mergeArrays(newArr, tail2)
-
+        if(head1 > head2) {
+            acc.push(head2)
+            return merge(l1, tail2, acc)
+        }
+        else {
+            acc.push(head1)
+            return merge(tail1, l2, acc)
         }
 
     }
+
+    const result = merge(l1, l2, [])
+    return result
 
 }
 
