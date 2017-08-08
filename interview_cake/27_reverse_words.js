@@ -1,7 +1,7 @@
-const reverseString = (string) => {
+const reverseWord = (array, wordBounds) => {
     
-    let array = string.split('');
-    const midpoint = Math.floor(array.length / 2);
+    wordBounds = wordBounds || [0, array.length - 1];
+    const midpoint = Math.floor(wordBounds[0] + wordBounds[1] / 2);
 
     for(let i = 0; i < midpoint; i++) {
         
@@ -12,10 +12,56 @@ const reverseString = (string) => {
         array[i] = swapChar;
 
     }
-
-    return array.join('');
+console.log(wordBounds)
+console.log(array)
+    return array;
 
 }
 
-const result = reverseString('hilfe');
+
+const getWordBounds = (array) => {
+
+    const wordBounds = [];
+    let lastSpaceIndex = -1;
+
+    for(let i = 0; i < array.length; i++) {
+        
+        const char = array[i];
+
+        if(char === ' ') {
+
+            wordBounds.push([lastSpaceIndex + 1, i - 1]);
+            lastSpaceIndex = i;
+
+        }
+        else if(i === array.length - 1) {
+
+            wordBounds.push([lastSpaceIndex + 1, i]);
+
+        }        
+
+    }
+
+    return wordBounds;
+
+}
+
+const reverseString = (string) => {
+
+    let array = string.split('');
+    array = reverseWord(array);
+    
+    const wordBounds = getWordBounds(array);
+    console.log(wordBounds)
+
+    for(let i = 0; i < wordBounds.length; i++) {
+
+        array = reverseWord(array, wordBounds[i]);
+
+    }
+
+    return array.join('');
+}
+
+const result = reverseString('you help i can');
 console.log(result);
