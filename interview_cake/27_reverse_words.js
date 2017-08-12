@@ -1,15 +1,23 @@
 const reverseWord = (array, wordBounds) => {
     
     wordBounds = wordBounds || [0, array.length - 1];
-    const midpoint = Math.floor(wordBounds[0] + wordBounds[1] / 2);
 
-    for(let i = 0; i < midpoint; i++) {
+    if(wordBounds[0] === wordBounds[1]) {
         
-        const swapIndex = array.length - i - 1;
-        const swapChar = array[swapIndex];
+        return array;
+
+    }
+
+    const steps = Math.floor((wordBounds[1] - wordBounds[0] + 1) / 2);
+
+    for(let i = 0; i < steps; i++) {
         
-        array[swapIndex] = array[i];
-        array[i] = swapChar;
+        const swapIndex = wordBounds[0] + i;
+        const lastSwapIndex = wordBounds[1] - i;
+        const swapChar = array[lastSwapIndex];
+        
+        array[lastSwapIndex] = array[swapIndex];
+        array[swapIndex] = swapChar;
 
     }
 console.log(wordBounds)
