@@ -71,5 +71,11 @@ const reverseString = (string) => {
     return array.join('');
 }
 
-const result = reverseString('you help i can');
-console.log(result);
+const fixtures = ['you help i can', 'bob there hi', 'cake eating am i']
+
+fixtures.forEach((sentence) => {
+
+    const result = reverseString(sentence);
+    console.log(result);
+
+});
